@@ -67,7 +67,12 @@
 
   <script src="config.js"></script>
   <script>
-    const API_URL = API_ENDPOINT + '?action=transaksi';
+    if (!localStorage.getItem("id_spreadsheet")) {
+  alert("⛔ Anda belum login. Silakan login terlebih dahulu.");
+  window.location.href = "login.html";
+}
+const API_URL = getAPIUrl('transaksi');
+
     const fromInput = document.getElementById('fromDate');
     const toInput = document.getElementById('toDate');
     const filterBtn = document.getElementById('filterDateBtn');
