@@ -14,9 +14,7 @@
       height: 48px;
       animation: spin 1s linear infinite;
     }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
     canvas { display: none; }
     #loadingOverlay {
       backdrop-filter: blur(3px);
@@ -24,16 +22,7 @@
     }
   </style>
 </head>
-<body class="bg-gradient-to-br from-indigo-100 to-white min-h-screen flex items-center justify-center p-4 pb-20 relative font-sans">
-
-  <!-- Nama PT -->
-  <div id="namaPtDisplay" class="absolute top-4 left-4 bg-white/70 px-4 py-2 rounded-xl shadow text-sm font-semibold text-indigo-800"></div>
-
-  <!-- Tombol Ke Dashboard -->
-  <a href="dashboard.html" 
-     class="absolute top-4 right-4 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl shadow font-semibold text-sm transition">
-    Dashboard
-  </a>
+<body class="bg-gradient-to-br from-indigo-100 to-white min-h-screen flex items-center justify-center p-4 relative font-sans">
 
   <!-- Loading Overlay -->
   <div id="loadingOverlay" class="hidden fixed inset-0 z-50 flex items-center justify-center">
@@ -42,7 +31,8 @@
 
   <!-- Popup Notif -->
   <div id="popupNotif" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
-      bg-white rounded-3xl shadow-2xl p-8 max-w-sm text-center opacity-0 pointer-events-none transition-opacity duration-300 z-60">
+              bg-white rounded-3xl shadow-2xl p-8 max-w-sm text-center
+              opacity-0 pointer-events-none transition-opacity duration-300 z-60">
     <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-4 h-14 w-14 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
     </svg>
@@ -51,43 +41,44 @@
     <button id="closePopupBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full px-6 py-2 font-semibold transition">Tutup</button>
   </div>
 
-  <!-- Form -->
-  <div class="bg-white rounded-3xl shadow-2xl w-full max-w-lg p-6 sm:p-10">
-    <h2 class="text-3xl font-bold text-indigo-800 mb-6 text-center">i-Shipping</h2>
-    <form id="ledgerForm" class="space-y-6 text-base sm:text-lg">
+  <!-- Tombol Ke Dashboard -->
+  <a href="dashboard.html" class="absolute top-4 right-4 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl shadow font-semibold text-sm">
+    Ke Dashboard
+  </a>
 
-      <!-- Nama -->
+  <!-- Form utama -->
+  <div class="bg-white rounded-3xl shadow-2xl w-full max-w-lg p-6">
+    <h2 class="text-3xl font-extrabold text-indigo-800 text-center mb-1 tracking-tight">i-Shipping</h2>
+    <div id="namaPtDisplay" class="text-center text-sm font-medium text-indigo-500 mb-6"></div>
+
+    <form id="ledgerForm" class="space-y-6 text-sm">
       <div>
         <label for="nama" class="block font-medium text-gray-700 mb-1">Driver/Kernet</label>
-        <select id="nama" required class="block w-full border border-gray-300 rounded-xl shadow-sm p-3 focus:ring-2 focus:ring-indigo-500"></select>
+        <select id="nama" required class="w-full border border-gray-300 rounded-xl p-3 text-base focus:ring-2 focus:ring-indigo-500"></select>
       </div>
 
-      <!-- Pangkalan -->
       <div>
         <label for="uraian" class="block font-medium text-gray-700 mb-1">Nama Pangkalan</label>
         <input list="uraianList" id="uraian" required 
-               class="block w-full border border-gray-300 rounded-xl shadow-sm p-3 focus:ring-2 focus:ring-indigo-500" />
+               class="w-full border border-gray-300 rounded-xl p-3 text-base focus:ring-2 focus:ring-indigo-500" />
         <datalist id="uraianList"></datalist>
       </div>
 
-      <!-- PT -->
       <div>
         <label for="pos" class="block font-medium text-gray-700 mb-1">Nama PT</label>
         <input type="text" id="pos" readonly 
-               class="block w-full bg-gray-100 border border-gray-300 rounded-xl p-3 cursor-not-allowed" />
+               class="w-full bg-gray-100 border border-gray-300 rounded-xl p-3 text-base cursor-not-allowed" />
       </div>
 
-      <!-- Jumlah -->
       <div>
-        <label for="nominal" class="block font-medium text-gray-700 mb-1">Jumlah LPG 3Kg</label>
+        <label for="nominal" class="block font-medium text-gray-700 mb-1">Jumlah Pengiriman LPG 3Kg</label>
         <input type="text" id="nominal" required 
-               class="block w-full border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-indigo-500" />
+               class="w-full border border-gray-300 rounded-xl p-3 text-base focus:ring-2 focus:ring-indigo-500" />
       </div>
 
-      <!-- Brightgas -->
       <div>
-        <label for="brightgasYN" class="block font-medium text-gray-700 mb-1">Driver kirim Bright Gas?</label>
-        <select id="brightgasYN" class="block w-full border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-indigo-500">
+        <label for="brightgasYN" class="block font-medium text-gray-700 mb-1">Apakah Kirim Bright Gas?</label>
+        <select id="brightgasYN" class="w-full border border-gray-300 rounded-xl p-3 text-base focus:ring-2 focus:ring-indigo-500">
           <option value="Tidak">Tidak</option>
           <option value="Ya">Ya</option>
         </select>
@@ -96,33 +87,27 @@
       <div id="brightgasContainer" class="hidden space-y-4">
         <div>
           <label for="brightgas12" class="block font-medium text-gray-700 mb-1">12 KG</label>
-          <input type="number" id="brightgas12" min="0" value="0"
-                 class="block w-full border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-indigo-500" />
+          <input type="number" id="brightgas12" min="0" value="0" class="w-full border border-gray-300 rounded-xl p-3 text-base" />
         </div>
         <div>
           <label for="brightgas55" class="block font-medium text-gray-700 mb-1">5.5 KG</label>
-          <input type="number" id="brightgas55" min="0" value="0"
-                 class="block w-full border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-indigo-500" />
+          <input type="number" id="brightgas55" min="0" value="0" class="w-full border border-gray-300 rounded-xl p-3 text-base" />
         </div>
       </div>
 
-      <!-- Foto Pangkalan -->
+      <!-- Kamera Foto Pangkalan -->
       <div>
         <label class="block font-medium text-gray-700 mb-1">Foto Pangkalan</label>
         <video id="videoNota" autoplay playsinline class="w-full h-56 object-cover rounded-xl shadow border"></video>
         <canvas id="canvasNota" class="hidden"></canvas>
         <button id="ambilNota" type="button" onclick="takeSnapshot('Nota')" 
-                class="mt-3 w-full bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl shadow font-semibold transition">
-          Ambil Foto
-        </button>
+                class="mt-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl font-semibold w-full">Ambil Foto</button>
         <img id="previewNota" class="w-full mt-3 hidden rounded-xl border shadow" />
       </div>
 
-      <!-- Retur -->
       <div>
         <label for="retur" class="block font-medium text-gray-700 mb-1">Retur</label>
-        <input type="number" id="retur" min="0" value="0"
-               class="block w-full border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-indigo-500" />
+        <input type="number" id="retur" required min="0" value="0" class="w-full border border-gray-300 rounded-xl p-3 text-base" />
       </div>
 
       <div id="returFotoContainer" class="hidden">
@@ -130,16 +115,13 @@
         <video id="videoRetur" autoplay playsinline class="w-full h-56 object-cover rounded-xl shadow border"></video>
         <canvas id="canvasRetur" class="hidden"></canvas>
         <button id="ambilRetur" type="button" onclick="takeSnapshot('Retur')" 
-                class="mt-3 w-full bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl shadow font-semibold transition">
-          Ambil Foto
-        </button>
+                class="mt-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl font-semibold w-full">Ambil Foto</button>
         <img id="previewRetur" class="w-full mt-3 hidden rounded-xl border shadow" />
       </div>
 
-      <!-- Pemilik -->
       <div>
-        <label for="pembayaran" class="block font-medium text-gray-700 mb-1">Pemilik hadir di Pangkalan?</label>
-        <select id="pembayaran" class="block w-full border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-indigo-500">
+        <label for="pembayaran" class="block font-medium text-gray-700 mb-1">Apakah Pemilik Pangkalan Ada di Lokasi?</label>
+        <select id="pembayaran" class="w-full border border-gray-300 rounded-xl p-3 text-base focus:ring-2 focus:ring-indigo-500">
           <option value="Tidak">Tidak</option>
           <option value="Ya">Ya</option>
         </select>
@@ -150,25 +132,25 @@
         <video id="videoBukti" autoplay playsinline class="w-full h-56 object-cover rounded-xl shadow border"></video>
         <canvas id="canvasBukti" class="hidden"></canvas>
         <button id="ambilBukti" type="button" onclick="takeSnapshot('Bukti')" 
-                class="mt-3 w-full bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl shadow font-semibold transition">
-          Ambil Foto
-        </button>
+                class="mt-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl font-semibold w-full">Ambil Foto</button>
         <img id="previewBukti" class="w-full mt-3 hidden rounded-xl border shadow" />
       </div>
 
       <button type="submit" 
-              class="w-full bg-gradient-to-r from-indigo-600 via-indigo-700 to-indigo-800 hover:via-indigo-900 text-white font-extrabold py-4 rounded-3xl shadow-xl text-lg transition">
+              class="w-full bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-3 rounded-full shadow-xl text-lg mt-4">
         Submit
       </button>
     </form>
   </div>
 
-  <!-- Script -->
   <script src="config.js"></script>
   <script src="kamera-kanvas.js"></script>
   <script>
-    const namaPT = localStorage.getItem('nama_pt') || 'PT Tidak Dikenal';
-    document.getElementById('namaPtDisplay').textContent = namaPT;
+    // Ambil Nama PT dari localStorage
+    const pt = JSON.parse(localStorage.getItem("userData") || "{}");
+    if (pt.nama_pt) {
+      document.getElementById("namaPtDisplay").textContent = pt.nama_pt;
+    }
 
 
 const API_NAMA = getAPIUrl('nama');
