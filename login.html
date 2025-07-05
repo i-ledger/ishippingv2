@@ -55,7 +55,7 @@
 <body>
   <div class="login-container">
     <h2>Login i-shipping</h2>
-    <input type="text" id="identifier" placeholder="Email atau ID" required>
+    <input type="text" id="identifier" placeholder="Email atau Sold to" required>
     <input type="password" id="password" placeholder="Password" required>
     <button onclick="loginPT()">Login</button>
     <div class="msg" id="msg"></div>
@@ -73,7 +73,7 @@
       const msg = document.getElementById("msg");
 
       if (!identifier || !password) {
-        msg.textContent = "Email atau ID dan password wajib diisi.";
+        msg.textContent = "Email atau Sold to dan password wajib diisi.";
         return;
       }
 
