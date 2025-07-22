@@ -7,6 +7,12 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gradient-to-br from-cyan-100 to-blue-200 min-h-screen p-2 sm:p-4">
+   <!-- SPINNER -->
+  <div id="spinner" class="fixed inset-0 bg-white bg-opacity-70 z-50 flex items-center justify-center hidden">
+    <div class="w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+  </div>
+
+  <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md p-6">
   <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md p-6">
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-2xl font-bold text-blue-600">Kelola Data Pangkalan</h2>
@@ -47,7 +53,15 @@
     if (!id_spreadsheet || loggedIn !== "true") {
       window.location.href = "login.html";
     }
+    const spinner = document.getElementById('spinner');
 
+    function showSpinner() {
+      spinner.classList.remove('hidden');
+    }
+
+    function hideSpinner() {
+      spinner.classList.add('hidden');
+    }
     let dataPOS = [];
 
     function loadPOS() {
@@ -71,7 +85,9 @@
           });
         })
         .catch(err => alert("❌ Gagal load Nama Pangkalan: " + err.message));
+        .finally(hideSpinner);
     }
+
 
     function tambahPos() {
       const uraian = document.getElementById("uraianInput").value.trim().toUpperCase();
@@ -95,7 +111,9 @@
         loadPOS();
       })
       .catch(err => alert("❌ Gagal tambah POS: " + err.message));
+        .finally(hideSpinner);
     }
+
 
     function editPos(index) {
       const current = dataPOS[index];
@@ -118,7 +136,9 @@
       .then(res => res.json())
       .then(loadPOS)
       .catch(err => alert("❌ Gagal edit POS: " + err.message));
+        .finally(hideSpinner);
     }
+
 
     function hapusPos(row) {
       if (!confirm("Yakin ingin menghapus baris " + row + "?")) return;
@@ -133,7 +153,9 @@
       .then(res => res.json())
       .then(loadPOS)
       .catch(err => alert("❌ Gagal hapus POS: " + err.message));
+        .finally(hideSpinner);
     }
+
 
     function uploadExcel() {
       const file = document.getElementById('fileUpload').files[0];
@@ -159,7 +181,9 @@
             .then(res => res.json())
             .then(loadPOS)
             .catch(err => console.error("❌ Gagal upload baris:", err));
-          }
+        .finally(hideSpinner);
+    }
+
         });
       };
       reader.readAsArrayBuffer(file);
