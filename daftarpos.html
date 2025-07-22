@@ -14,8 +14,8 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-      <input type="text" id="uraianInput" placeholder="Uraian (misal: KERTAS)" class="border border-gray-300 rounded-md px-3 py-2 w-full" />
-      <input type="text" id="posInput" placeholder="Pos (misal: ATK)" class="border border-gray-300 rounded-md px-3 py-2 w-full" />
+      <input type="text" id="uraianInput" placeholder="Nama Pangkalan" class="border border-gray-300 rounded-md px-3 py-2 w-full" />
+      <input type="text" id="posInput" placeholder="Nama Perusahaan" class="border border-gray-300 rounded-md px-3 py-2 w-full" />
       <button onclick="tambahPos()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md px-4 py-2 w-full">Tambah</button>
     </div>
 
@@ -70,7 +70,7 @@
             tbody.appendChild(tr);
           });
         })
-        .catch(err => alert("❌ Gagal load POS: " + err.message));
+        .catch(err => alert("❌ Gagal load Nama Pangkalan: " + err.message));
     }
 
     function tambahPos() {
