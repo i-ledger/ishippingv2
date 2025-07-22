@@ -168,7 +168,7 @@
         fromInput.value = today;
         toInput.value = today;
 
-        const pts = [...new Set(data.map(d => d.pos))].sort();
+        const pts = [...new Set(data.map(d => d.nama))].sort();
         const pgls = [...new Set(data.map(d => d.uraian))].sort();
 
         filterPT.innerHTML = '<option value="">Semua</option>' + pts.map(p => `<option>${p}</option>`).join('');
