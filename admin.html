@@ -43,7 +43,7 @@
         <button id="filterDateBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-sm">Filter</button>
       </div>
       <div>
-        <label class="block mb-1 font-semibold text-sm">Filter Nama PT</label>
+        <label class="block mb-1 font-semibold text-sm">Filter Nama Driver/Kernet</label>
         <select id="filterPT" class="w-full border p-2 rounded-xl text-sm">
           <option value="">Semua</option>
         </select>
@@ -150,7 +150,7 @@
       const filtered = data.filter(r => {
         const d = new Date(r.timestamp);
         return (!from || d >= from) && (!to || d <= to) &&
-               (!filterPT.value || r.pos === filterPT.value) &&
+               (!filterPT.value || r.nama === filterPT.value) &&
                (!filterPangkalan.value || r.uraian === filterPangkalan.value);
       });
       rekapBody.innerHTML = filtered.map(renderRow).join('');
