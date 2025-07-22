@@ -81,8 +81,9 @@
 
   <script src="config.js"></script>
   <script>
-    if (!localStorage.getItem("id_spreadsheet")) {
-      alert("⛔ Anda belum login. Silakan login terlebih dahulu.");
+    const id_spreadsheet = localStorage.getItem("id_spreadsheet");
+    const loggedIn = localStorage.getItem("loggedIn");
+    if (!id_spreadsheet || loggedIn !== "true") {
       window.location.href = "login.html";
     }
 
@@ -209,6 +210,8 @@
     });
 
     fetchData();
+    loadPOS();
+    setTimeout(() => localStorage.removeItem('loggedIn'), 300000);
   </script>
 </body>
 </html>
