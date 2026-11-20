@@ -1,17 +1,101 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Masuk · i-Shipping</title><link rel="icon" href="pertamina-logoicon.png"><link rel="stylesheet" href="style.css"></head><body>
-<main class="auth"><form class="card brand" id="f">
-<img src="pertamina-logo.png" alt="i-Shipping">
-<div class="f"><label for="id">Email atau Sold to</label><input id="id" required autocomplete="username"></div>
-<div class="f"><label for="pw">Kata sandi</label><input id="pw" type="password" required autocomplete="current-password"></div>
-<button class="btn block" id="go">Masuk</button><div class="msg" id="msg" role="alert"></div>
-<p class="mut" style="text-align:center;margin-top:14px">Belum punya akun? <a href="register.html">Daftarkan PT</a></p>
-</form></main>
-<script src="config.js"></script><script>
-document.getElementById('f').onsubmit=async e=>{e.preventDefault();
-const m=document.getElementById('msg'),b=document.getElementById('go'),id=document.getElementById('id').value.trim(),pw=document.getElementById('pw').value.trim();
-m.className='msg ok';m.textContent='Memproses…';b.disabled=true;
-try{const r=await(await fetch(`${API_ENDPOINT}?action=loginPT&identifier=${encodeURIComponent(id)}&password=${encodeURIComponent(pw)}`)).json();
-if(r.status==='success'&&r.id_spreadsheet){localStorage.setItem('loggedIn','true');localStorage.setItem('id_spreadsheet',r.id_spreadsheet);localStorage.setItem('nama_pt',r.nama_pt);localStorage.setItem('email',id);location.href='dashboard.html';return}
-m.className='msg';m.textContent=r.message||'Email atau kata sandi salah.'}catch{m.className='msg';m.textContent='Tidak bisa terhubung ke server. Periksa koneksi lalu coba lagi.'}
-b.disabled=false};
-</script></body></html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - i-shipping</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 320px;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    .msg {
+      text-align: center;
+      margin-top: 10px;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login i-shipping</h2>
+    <input type="text" id="identifier" placeholder="Email atau Sold to" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button onclick="loginPT()">Login</button>
+    <div class="msg" id="msg"></div>
+    <p style="text-align:center;margin-top:15px;font-size:0.9em">
+    </p>
+  </div>
+
+  <script src="config.js"></script>
+  <script>
+    const API = API_ENDPOINT;
+
+    async function loginPT() {
+      const identifier = document.getElementById("identifier").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const msg = document.getElementById("msg");
+
+      if (!identifier || !password) {
+        msg.textContent = "Email atau Sold to dan password wajib diisi.";
+        return;
+      }
+
+      msg.textContent = "Memproses login...";
+
+      try {
+        const res = await fetch(`${API}?action=loginPT&identifier=${encodeURIComponent(identifier)}&password=${encodeURIComponent(password)}`);
+        const data = await res.json();
+
+        if (data.status === "success" && data.id_spreadsheet) {
+          localStorage.setItem("loggedIn", "true");
+          localStorage.setItem("id_spreadsheet", data.id_spreadsheet);
+          localStorage.setItem("nama_pt", data.nama_pt);
+          localStorage.setItem("email", identifier); // bisa email atau ID
+          window.location.href = "dashboard.html";
+        } else {
+          msg.textContent = data.message || "Login gagal.";
+        }
+      } catch (err) {
+        msg.textContent = "Gagal koneksi ke server.";
+      }
+    }
+  </script>
+</body>
+</html>
